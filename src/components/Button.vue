@@ -11,5 +11,9 @@
   padding: 16px 10px;
   border-radius: 30px;
   width: 315px;
+  border: none;
+  color: var(--color-white);
+  background-color: var(--color-blue);
+  cursor: pointer;
 }
 </style>
