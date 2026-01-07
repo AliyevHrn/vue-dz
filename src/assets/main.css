@@ -1,0 +1,17 @@
+:root {
+  --color-blue: #008bfe;
+  --color-white: #ffffff;
+  --color-lightblue: #cce8ff;
+  --color-bg: #f0f4f8;
+  --font: "Roboto", sans-serif;
+}
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+body {
+  font-family: var(--font);
+  padding: 40px 60px;
+  background-color: var(--color-bg);
+}
