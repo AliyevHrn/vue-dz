@@ -1,11 +1,8 @@
 <script setup>
 import ScoreIcon from "@/icons/ScoreIcon.vue";
-const { scoreNumber } = defineProps({
-  scoreNumber: {
-    type: Number,
-    default: 100,
-  },
-});
+import { ref } from "vue";
+
+const scoreNumber = ref(0);
 </script>
 
 <template>

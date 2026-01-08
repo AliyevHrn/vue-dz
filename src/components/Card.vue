@@ -1,19 +1,28 @@
 <script setup>
-const emit = defineEmits(["cardReverse", "statusChange"]);
-function reverseCard() {
-  emit("cardReverse");
-}
-function changeStatus() {
-  emit("statusChange");
-}
+import { ref } from "vue";
+
+// const emit = defineEmits(["cardReverse", "statusChange"]);
+// function reverseCard() {
+//   emit("cardReverse");
+// }
+// function changeStatus() {
+//   emit("statusChange");
+// }
+
+const cardData = ref({
+  word: "unadmitted",
+  translation: "не допущенный",
+  state: "closed",
+  status: null,
+});
 </script>
 
 <template>
   <div class="card">
     <div class="card-wrapper">
       <span class="card-number">01</span>
-      <span class="card-en-text">unadmitted</span>
-      <span class="card-ru-text">не допущенный</span>
+      <span class="card-en-text">{{ cardData.word }}</span>
+      <span class="card-ru-text">{{ cardData.translation }}</span>
       <span class="card-reverse-text">Перевернуть</span>
     </div>
   </div>
