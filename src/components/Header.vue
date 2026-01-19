@@ -1,10 +1,17 @@
 <script setup>
 import Score from "./Score.vue";
+
+defineProps({
+  scoreNumber: {
+    type: Number,
+    default: 0,
+  },
+});
 </script>
 <template>
   <div class="header">
     <h1>Запомни слово</h1>
-    <Score />
+    <Score :score-number />
   </div>
 </template>
 
@@ -19,7 +26,7 @@ h1 {
   font-size: 16px;
   font-weight: 700;
   line-height: 24px;
-  letter-spacing: 12%;
+  letter-spacing: 0.1rem;
   transform: scaleY(0.8);
   text-transform: uppercase;
 }
