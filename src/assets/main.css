@@ -15,3 +15,13 @@ body {
   padding: 40px 60px;
   background-color: var(--color-bg);
 }
+@media (max-width: 1024px) {
+  body {
+    padding: 40px;
+  }
+}
+@media (max-width: 840px) {
+  body {
+    padding: 30px 20px;
+  }
+}
