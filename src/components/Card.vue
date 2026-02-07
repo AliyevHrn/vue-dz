@@ -73,7 +73,7 @@ const props = defineProps({
 
 <style scoped>
 .card {
-  width: 275px;
+  width: calc(25% - 100px);
   height: 376px;
   border-radius: 16px;
   background-color: var(--color-white);
@@ -144,5 +144,25 @@ const props = defineProps({
 .card-status button svg {
   width: 24px;
   height: 24px;
+}
+@media (max-width: 1440px) {
+  .card {
+    width: calc(25% - 50px);
+  }
+}
+@media (max-width: 1200px) {
+  .card {
+    width: calc(25% - 30px);
+  }
+}
+@media (max-width: 1024px) {
+  .card {
+    width: calc(33% - 20px);
+  }
+}
+@media (max-width: 840px) {
+  .card {
+    width: calc(33% - 10px);
+  }
 }
 </style>

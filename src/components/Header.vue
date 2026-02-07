@@ -30,4 +30,9 @@ h1 {
   transform: scaleY(0.8);
   text-transform: uppercase;
 }
+@media (max-width: 1024px) {
+  .header {
+    margin-bottom: 50px;
+  }
+}
 </style>

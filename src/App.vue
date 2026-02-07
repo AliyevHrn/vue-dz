@@ -88,6 +88,7 @@ function startGame() {
 <style scoped>
 .card-list {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   gap: 100px;
 }
@@ -103,5 +104,25 @@ function startGame() {
 }
 .btn-reset {
   margin-top: 50px;
+}
+@media (max-width: 1440px) {
+  .card-list {
+    gap: 50px;
+  }
+}
+@media (max-width: 1200px) {
+  .card-list {
+    gap: 30px;
+  }
+}
+@media (max-width: 1024px) {
+  .card-list {
+    gap: 20px;
+  }
+}
+@media (max-width: 840px) {
+  .card-list {
+    gap: 10px;
+  }
 }
 </style>
