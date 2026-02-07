@@ -1,85 +1,61 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import Button from "./components/Button.vue";
 import Card from "./components/Card.vue";
 import Header from "./components/Header.vue";
 
-const gameStatus = ref(false);
-let scoreNumber = ref(0);
-const wordsList = ref([
-  {
-    id: 1,
-    word: "table",
-    tranlation: "Стол",
-    status: "closed",
-  },
-  {
-    id: 2,
-    word: "pen",
-    tranlation: "Ручка",
-    status: "closed",
-  },
-  {
-    id: 3,
-    word: "task",
-    tranlation: "Задача",
-    status: "closed",
-  },
-  {
-    id: 4,
-    word: "book",
-    tranlation: "Книга",
-    status: "closed",
-  },
-]);
+const ENDPOINT = "http://localhost:8080/api/random-words";
+const data = ref(null);
+const gameIsStarted = ref(false);
+const scoreNumber = ref(0);
 
-function openCard(card) {
-  card.status = "pending";
-}
-function updateStatus({ id, status }) {
-  const cardIndex = wordsList.value.findIndex((card) => card.id === id);
-  wordsList.value[cardIndex].status = status;
-
-  // Обновляем счет
-  if (status === "success") {
-    scoreNumber.value += 1;
+const fetchData = async () => {
+  try {
+    const response = await fetch(ENDPOINT);
+    if (!response.ok) {
+      throw new Error("Проблемы с запросом к api");
+    }
+    data.value = await response.json();
+  } catch (err) {
+    console.log(err.message);
   }
-  // else if (status === "fail") {
-  //   scoreNumber.value = Math.max(0, scoreNumber.value - 1);
-  // }
-}
+};
+
+onMounted(() => {
+  fetchData();
+});
+
 function resetGame() {
-  wordsList.value.forEach((card) => {
-    card.status = "closed";
-  });
+  fetchData();
   scoreNumber.value = 0;
-  gameStatus.value = true;
+  gameIsStarted.value = true;
 }
 function startGame() {
-  gameStatus.value = true;
+  gameIsStarted.value = true;
+}
+function handleStatus(status) {
+  status === "success" ? (scoreNumber.value += 1) : scoreNumber.value;
 }
 </script>
 
 <template>
   <Header :score-number="scoreNumber" />
-  <div class="card-list" v-if="gameStatus">
+  <div class="card-list" v-if="gameIsStarted">
     <Card
-      v-for="card in wordsList"
-      :key="card.id"
-      :id="card.id"
+      v-for="(card, i) in data"
+      :key="card.word"
+      :id="i + 1"
       :word="card.word"
-      :translation="card.tranlation"
-      :status="card.status"
-      @click.capture="openCard(card)"
-      @fail-card="updateStatus"
-      @success-card="updateStatus"
+      :translation="card.translation"
+      @fail-status="handleStatus"
+      @success-status="handleStatus"
     />
   </div>
   <div class="btns-list">
-    <Button class="btn-start" @click="startGame()" v-if="!gameStatus"
+    <Button class="btn-start" @click="startGame()" v-if="!gameIsStarted"
       >Начать игру</Button
     >
-    <Button class="btn-reset" @click="resetGame()" v-if="gameStatus"
+    <Button class="btn-reset" @click="resetGame()" v-if="gameIsStarted"
       >Начать заново</Button
     >
   </div>
@@ -88,6 +64,7 @@ function startGame() {
 <style scoped>
 .card-list {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   gap: 100px;
 }
@@ -103,5 +80,25 @@ function startGame() {
 }
 .btn-reset {
   margin-top: 50px;
+}
+@media (max-width: 1440px) {
+  .card-list {
+    gap: 50px;
+  }
+}
+@media (max-width: 1200px) {
+  .card-list {
+    gap: 30px;
+  }
+}
+@media (max-width: 1024px) {
+  .card-list {
+    gap: 20px;
+  }
+}
+@media (max-width: 840px) {
+  .card-list {
+    gap: 10px;
+  }
 }
 </style>
