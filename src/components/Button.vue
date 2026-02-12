@@ -16,4 +16,11 @@
   background-color: var(--color-blue);
   cursor: pointer;
 }
+@media (max-width: 540px) {
+  .button {
+    font-size: 18px;
+    width: 280px;
+    padding: 12px 10px;
+  }
+}
 </style>

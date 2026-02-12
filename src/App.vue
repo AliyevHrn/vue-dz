@@ -27,14 +27,14 @@ onMounted(() => {
 
 function resetGame() {
   fetchData();
-  scoreNumber.value = 0;
   gameIsStarted.value = true;
 }
 function startGame() {
   gameIsStarted.value = true;
 }
 function handleStatus(status) {
-  status === "success" ? (scoreNumber.value += 1) : scoreNumber.value;
+  status === "success" ? (scoreNumber.value += 10) : (scoreNumber.value -= 4);
+  if (scoreNumber.value < 0) scoreNumber.value = 0;
 }
 </script>
 
@@ -63,10 +63,9 @@ function handleStatus(status) {
 
 <style scoped>
 .card-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 100px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 50px;
 }
 .btns-list {
   display: flex;
@@ -81,23 +80,20 @@ function handleStatus(status) {
 .btn-reset {
   margin-top: 50px;
 }
-@media (max-width: 1440px) {
-  .card-list {
-    gap: 50px;
-  }
-}
 @media (max-width: 1200px) {
   .card-list {
-    gap: 30px;
+    gap: 20px;
   }
 }
 @media (max-width: 1024px) {
   .card-list {
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
   }
 }
 @media (max-width: 840px) {
   .card-list {
+    grid-template-columns: repeat(2, 1fr);
     gap: 10px;
   }
 }

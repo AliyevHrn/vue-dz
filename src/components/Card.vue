@@ -29,7 +29,7 @@ function failStatus() {
       success: cardStatus === 'success',
       fail: cardStatus === 'fail',
     }"
-    @click.capture="cardStatus = 'pending'"
+    @click.once="cardStatus = 'pending'"
   >
     <div class="card-wrapper">
       <span class="card-id">{{ id < 10 ? "0" : "" }}{{ id }}</span>
@@ -73,7 +73,6 @@ function failStatus() {
 
 <style scoped>
 .card {
-  width: calc(25% - 100px);
   height: 376px;
   border-radius: 16px;
   background-color: var(--color-white);
@@ -146,24 +145,35 @@ function failStatus() {
   width: 24px;
   height: 24px;
 }
-@media (max-width: 1440px) {
+@media (max-width: 540px) {
   .card {
-    width: calc(25% - 50px);
+    height: 280px;
+    padding: 20px 12px;
+  }
+  .card-correct-icon,
+  .card-fail-icon {
+    top: -12px;
+  }
+  .card-correct-icon svg,
+  .card-fail-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+  .card-word,
+  .card-translation {
+    font-size: 16px;
+  }
+  .card-status {
+    font-size: 10px;
   }
 }
-@media (max-width: 1200px) {
+@media (max-width: 420px) {
   .card {
-    width: calc(25% - 30px);
+    height: 240px;
   }
-}
-@media (max-width: 1024px) {
-  .card {
-    width: calc(33% - 20px);
-  }
-}
-@media (max-width: 840px) {
-  .card {
-    width: calc(33% - 10px);
+  .card-word,
+  .card-translation {
+    font-size: 14px;
   }
 }
 </style>
