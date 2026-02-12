@@ -22,6 +22,16 @@ defineProps({
   justify-content: space-between;
   margin-bottom: 85px;
 }
+@media (max-width: 1200px) {
+  .header {
+    margin-bottom: 60px;
+  }
+}
+@media (max-width: 540px) {
+  .header {
+    margin-bottom: 40px;
+  }
+}
 h1 {
   font-size: 16px;
   font-weight: 700;
